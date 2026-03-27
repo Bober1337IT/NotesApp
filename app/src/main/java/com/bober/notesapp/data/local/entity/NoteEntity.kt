@@ -6,7 +6,8 @@ import com.bober.notesapp.domain.model.Note
 
 @Entity
 data class NoteEntity(
-    @PrimaryKey val id: Int? = null,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val title: String,
     val content: String,
     val timestamp: Long,
