@@ -12,4 +12,8 @@ import com.bober.notesapp.data.local.entity.NoteEntity
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
+
+    companion object{
+        const val DATABASE_NAME = "notes_db"
+    }
 }
