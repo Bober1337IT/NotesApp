@@ -6,8 +6,9 @@ import com.bober.notesapp.domain.util.NoteOrder
 import com.bober.notesapp.domain.util.OrderType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class GetNotes(
+class GetNotes @Inject constructor(
     private val repository: NoteRepository
 ) {
     operator fun invoke(
