@@ -1,0 +1,15 @@
+package com.bober.notesapp.data.local
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.bober.notesapp.data.local.dao.NoteDao
+import com.bober.notesapp.data.local.entity.NoteEntity
+
+@Database(
+    entities = [NoteEntity::class],
+    version = 1
+)
+abstract class NoteDatabase : RoomDatabase() {
+
+    abstract fun noteDao(): NoteDao
+}
