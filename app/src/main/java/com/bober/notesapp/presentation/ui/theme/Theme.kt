@@ -1,4 +1,4 @@
-package com.bober.notesapp.ui.theme
+package com.bober.notesapp.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

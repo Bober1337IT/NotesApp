@@ -1,4 +1,4 @@
-package com.bober.notesapp.ui.theme
+package com.bober.notesapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
