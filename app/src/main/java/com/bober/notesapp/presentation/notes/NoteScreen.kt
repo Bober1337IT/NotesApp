@@ -34,19 +34,33 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bober.notesapp.domain.model.Note
 import com.bober.notesapp.presentation.notes.components.NoteItem
 import com.bober.notesapp.presentation.notes.components.OrderSection
 import kotlinx.coroutines.launch
 
 @Composable
 fun NoteScreen(
-    //navController: NavController,
+    // navController: NavController,
     viewModel: NotesViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
+
+    NoteScreenContent(
+        state = state,
+        onEvent = { viewModel.onEvent(it) }
+    )
+}
+
+@Composable
+fun NoteScreenContent(
+    state: NotesState,
+    onEvent: (NotesEvent) -> Unit
+) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
@@ -79,7 +93,7 @@ fun NoteScreen(
                 )
                 IconButton(
                     onClick = {
-                        viewModel.onEvent(NotesEvent.ToggleOrderSection)
+                        onEvent(NotesEvent.ToggleOrderSection)
                     }
                 ) {
                     Icon(
@@ -99,7 +113,7 @@ fun NoteScreen(
                         .padding(vertical = 16.dp),
                     noteOrder = state.noteOrder,
                     onOrderChange = {
-                        viewModel.onEvent(NotesEvent.Order(it))
+                        onEvent(NotesEvent.Order(it))
                     }
                 )
             }
@@ -116,14 +130,14 @@ fun NoteScreen(
 
                             },
                         onDeleteNote = {
-                            viewModel.onEvent(NotesEvent.DeleteNote(note))
+                            onEvent(NotesEvent.DeleteNote(note))
                             scope.launch {
                                 val result = snackbarHostState.showSnackbar(
                                     message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
                                 if (result == SnackbarResult.ActionPerformed) {
-                                    viewModel.onEvent(NotesEvent.RestoreNote)
+                                    onEvent(NotesEvent.RestoreNote)
                                 }
                             }
                         }
@@ -132,5 +146,35 @@ fun NoteScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NoteScreenPreview() {
+    val fakeState = NotesState(
+        notes = listOf(
+            Note(
+                id = 1,
+                title = "Preview Note 1",
+                content = "Content 1",
+                timestamp = 1L,
+                color = 0xFFFFAB91.toInt()
+            ),
+            Note(
+                id = 2,
+                title = "Preview Note 2",
+                content = "Content 2",
+                timestamp = 2L,
+                color = 0xFFE7ED9B.toInt())
+        ),
+        isOrderSectionVisible = true
+    )
+
+    MaterialTheme {
+        NoteScreenContent(
+            state = fakeState,
+            onEvent = {}
+        )
     }
 }
