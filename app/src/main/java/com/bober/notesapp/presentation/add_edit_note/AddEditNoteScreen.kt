@@ -182,8 +182,8 @@ fun AddEditNoteScreenPreview() {
         AddEditNoteScreenContent(
             titleState = NoteTextFieldState(text = "My Note", isHintVisible = false),
             contentState = NoteTextFieldState(hint = "Enter some content...", isHintVisible = true),
-            noteColor = Note.noteColors[0],
-            viewModelColor = Note.noteColors[0],
+            noteColor = Note.noteColors[2],
+            viewModelColor = Note.noteColors[2],
             snackbarHostState = remember { SnackbarHostState() },
             onEvent = {}
         )

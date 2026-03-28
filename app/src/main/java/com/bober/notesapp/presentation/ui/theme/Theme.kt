@@ -15,33 +15,33 @@ private val DarkColorScheme = darkColorScheme(
     primary = BabyBlue,
     secondary = Violet,
     tertiary = RedPink,
-    background = DarkGray,
+    background = DarkBlue,
     surface = LightBlue,
-    onPrimary = DarkGray,
+    onPrimary = DarkBlue,
     onSecondary = Color.White,
     onTertiary = Color.White,
     onBackground = Color.White,
-    onSurface = DarkGray
+    onSurface = DarkBlue
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    background = Color(0xFFFFFBFE),
+    background = Color(0xFFE5D7D8),
     surface = LightBlue,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onTertiary = Color.White,
-    onBackground = DarkGray,
-    onSurface = DarkGray
+    onBackground = DarkBlue,
+    onSurface = DarkBlue
 )
 
 @Composable
 fun NotesAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

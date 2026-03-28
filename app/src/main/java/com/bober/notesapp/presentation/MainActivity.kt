@@ -24,9 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NotesAppTheme {
-                Surface(
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                Surface {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
