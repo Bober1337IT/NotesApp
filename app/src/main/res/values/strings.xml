@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">NotesApp</string>
+    <string name="fake_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vestibulum vel arcu vel ullamcorper. Integer venenatis diam ac facilisis accumsan. Phasellus lorem felis, sollicitudin non justo ut, posuere dignissim nunc. Nunc dignissim volutpat mauris quis rhoncus. Curabitur tempor ipsum non lacus porttitor mollis. Etiam dictum eros eros, at auctor augue consequat a. Fusce a arcu ac est maximus hendrerit at lacinia tellus.
+
+In feugiat dui non laoreet vestibulum. Nunc vulputate id mauris a iaculis. Curabitur vitae tempus justo. Morbi a est et sapien maximus porta eu ac ante. Cras gravida feugiat elementum. Vestibulum dictum volutpat est sit amet commodo. Suspendisse sed lectus magna. Pellentesque eget augue sed ipsum aliquet tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla sed auctor arcu. Proin ligula nisl, auctor ac ornare eu, mattis quis lorem. Phasellus et gravida metus, vitae tincidunt nibh. Nam tempus, libero porttitor mattis suscipit, neque neque viverra nunc, non ultrices nibh odio non turpis. Vestibulum dui sem, congue vel tellus ac, convallis iaculis mauris. Integer vulputate, augue bibendum congue ullamcorper, lacus enim luctus magna, sed iaculis magna enim eget augue.</string>
 </resources>

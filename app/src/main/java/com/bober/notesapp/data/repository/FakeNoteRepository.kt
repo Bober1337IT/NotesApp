@@ -1,5 +1,7 @@
 package com.bober.notesapp.data.repository
 
+import android.app.Application
+import com.bober.notesapp.R
 import com.bober.notesapp.domain.model.Note
 import com.bober.notesapp.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
@@ -7,12 +9,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class FakeNoteRepository @Inject constructor(): NoteRepository {
+class FakeNoteRepository @Inject constructor(
+    private val app: Application
+): NoteRepository {
 
     private val notes = mutableListOf<Note>(
-        Note(id = 1, title = "First Note", content = "Content 1", timestamp = 1L, color = 0xFFFFAB91.toInt()),
-        Note(id = 2, title = "Second Note", content = "Content 2", timestamp = 2L, color = 0xFFE7ED9B.toInt()),
-        Note(id = 3, title = "Third Note", content = "Content 3", timestamp = 3L, color = 0xFFD7AEFB.toInt())
+        Note(id = 1, title = "First Note", content = app.getString(R.string.fake_content), timestamp = 1L, color = 0xFFFFAB91.toInt()),
+        Note(id = 2, title = "Second Note", content = app.getString(R.string.fake_content), timestamp = 2L, color = 0xFFE7ED9B.toInt()),
+        Note(id = 3, title = "Third Note", content = app.getString(R.string.fake_content), timestamp = 3L, color = 0xFFD7AEFB.toInt())
     )
     private val _notesFlow = MutableStateFlow<List<Note>>(notes)
 

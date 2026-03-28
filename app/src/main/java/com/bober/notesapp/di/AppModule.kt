@@ -26,10 +26,15 @@ object AppModule {
         ).build()
     }
 
+//    @Provides
+//    @Singleton
+//    fun provideNoteRepository(db : NoteDatabase): NoteRepository{
+//        return NoteRepositoryImpl(db.noteDao())
+//    }
+
     @Provides
     @Singleton
-    fun provideNoteRepository(db : NoteDatabase): NoteRepository{
-        //return NoteRepositoryImpl(db.noteDao())
-        return FakeNoteRepository()
+    fun provideNoteRepository(app: Application): NoteRepository{
+        return FakeNoteRepository(app)
     }
 }
