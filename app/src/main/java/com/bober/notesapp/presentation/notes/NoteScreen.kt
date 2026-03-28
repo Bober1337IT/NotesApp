@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -138,9 +139,17 @@ fun NoteScreenContent(
                         onDeleteNote = {
                             onEvent(NotesEvent.DeleteNote(note))
                             scope.launch {
+                                val maxTitleLength = 15
+                                val truncatedTitle = if (note.title.length > maxTitleLength) {
+                                    note.title.take(maxTitleLength).trimEnd() + "..."
+                                } else {
+                                    note.title
+                                }
+
                                 val result = snackbarHostState.showSnackbar(
-                                    message = "Note deleted",
-                                    actionLabel = "Undo"
+                                    message = "Note \"$truncatedTitle\" deleted",
+                                    actionLabel = "Undo",
+                                    duration = SnackbarDuration.Short
                                 )
                                 if (result == SnackbarResult.ActionPerformed) {
                                     onEvent(NotesEvent.RestoreNote)
