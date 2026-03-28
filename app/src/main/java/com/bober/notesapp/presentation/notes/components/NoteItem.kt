@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.ColorUtils
@@ -99,6 +100,24 @@ fun NoteItem(
             Icon(
                 imageVector = Icons.Default.Delete,
                 contentDescription = "Delete note"
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NoteItemPreview() {
+    MaterialTheme {
+        Box(modifier = Modifier.padding(16.dp)) {
+            NoteItem(
+                note = Note(
+                    title = "Meeting Notes",
+                    content = "Discuss the new architecture components and Hilt implementation in the NotesApp project.",
+                    timestamp = System.currentTimeMillis(),
+                    color = 0xFFFFAB91.toInt()
+                ),
+                onDeleteNote = {}
             )
         }
     }
