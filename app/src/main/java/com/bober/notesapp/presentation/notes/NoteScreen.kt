@@ -1,5 +1,11 @@
 package com.bober.notesapp.presentation.notes
 
+import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +32,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bober.notesapp.presentation.notes.components.OrderSection
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun NoteScreen(
     //navController: NavController,
@@ -42,7 +50,7 @@ fun NoteScreen(
             FloatingActionButton(onClick = {
 
             },
-                modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                containerColor = MaterialTheme.colorScheme.primary
             ){
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
             }
@@ -72,6 +80,22 @@ fun NoteScreen(
                         contentDescription = "Sort"
                     )
                 }
+            }
+            AnimatedVisibility(
+                visible = state.isOrderSectionVisible,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
+                ) {
+                OrderSection(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                    noteOrder = state.noteOrder,
+                    onOrderChange = {
+                        viewModel.onEvent(NotesEvent.Order(it))
+                    }
+                )
+
             }
         }
     }
