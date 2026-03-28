@@ -1,0 +1,13 @@
+package com.bober.notesapp.domain.use_case
+
+import com.bober.notesapp.domain.model.Note
+import com.bober.notesapp.domain.repository.NoteRepository
+import javax.inject.Inject
+
+class GetNote @Inject constructor(
+    private val repository: NoteRepository
+) {
+    suspend operator fun invoke(id: Int): Note? {
+        return repository.getNoteById(id)
+    }
+}
