@@ -41,16 +41,18 @@ import androidx.navigation.NavController
 import com.bober.notesapp.domain.model.Note
 import com.bober.notesapp.presentation.notes.components.NoteItem
 import com.bober.notesapp.presentation.notes.components.OrderSection
+import com.bober.notesapp.presentation.util.Screen
 import kotlinx.coroutines.launch
 
 @Composable
 fun NoteScreen(
-    // navController: NavController,
+    navController: NavController,
     viewModel: NotesViewModel = hiltViewModel()
 ) {
     val state by viewModel.state
 
     NoteScreenContent(
+        navController = navController,
         state = state,
         onEvent = { viewModel.onEvent(it) }
     )
@@ -58,6 +60,7 @@ fun NoteScreen(
 
 @Composable
 fun NoteScreenContent(
+    navController: NavController,
     state: NotesState,
     onEvent: (NotesEvent) -> Unit
 ) {
@@ -68,7 +71,7 @@ fun NoteScreenContent(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-
+                navController.navigate(Screen.AddEditNoteScreen.route)
             },
                 containerColor = MaterialTheme.colorScheme.primary
             ){
@@ -127,7 +130,9 @@ fun NoteScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-
+                                navController.navigate(
+                                    Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
+                                )
                             },
                         onDeleteNote = {
                             onEvent(NotesEvent.DeleteNote(note))
@@ -171,8 +176,10 @@ fun NoteScreenPreview() {
         isOrderSectionVisible = true
     )
 
+    val navController = androidx.navigation.compose.rememberNavController()
     MaterialTheme {
         NoteScreenContent(
+            navController = navController,
             state = fakeState,
             onEvent = {}
         )
