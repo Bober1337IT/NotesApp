@@ -1,6 +1,5 @@
 package com.bober.notesapp.presentation.notes.components
 
-import android.widget.Space
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
