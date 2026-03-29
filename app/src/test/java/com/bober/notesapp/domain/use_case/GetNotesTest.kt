@@ -38,6 +38,26 @@ class GetNotesTest {
     }
 
     @Test
+    fun `Get notes, returns updated list after insertion`() = runTest {
+
+        val initialNotes = getNotes().first()
+        assertThat(initialNotes.size).isEqualTo(26)
+
+        val newNote = Note(
+            title = "New Note",
+            content = "New Content",
+            timestamp = 999L,
+            color = 1,
+            id = 100
+        )
+        fakeRepository.insertNote(newNote)
+        val updatedNotes = getNotes().first()
+
+        assertThat(updatedNotes.size).isEqualTo(27)
+        assertThat(updatedNotes).contains(newNote)
+    }
+
+    @Test
     fun `Order notes by title ascending, correct order`() = runTest {
         val notes = getNotes(NoteOrder.Title(OrderType.Ascending)).first()
 
