@@ -30,11 +30,6 @@ object AppModule {
     @Singleton
     fun provideNoteRepository(db : NoteDatabase): NoteRepository{
         return NoteRepositoryImpl(db.noteDao())
+        // return FakeNoteRepository()
     }
-
-//    @Provides
-//    @Singleton
-//    fun provideNoteRepository(app: Application): NoteRepository{
-//        return FakeNoteRepository(app)
-//    }
 }
