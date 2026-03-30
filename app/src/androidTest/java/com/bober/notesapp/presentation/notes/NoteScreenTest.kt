@@ -13,13 +13,17 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.bober.notesapp.core.util.TestTags
 import com.bober.notesapp.di.AppModule
+import com.bober.notesapp.domain.model.Note
+import com.bober.notesapp.domain.repository.NoteRepository
 import com.bober.notesapp.presentation.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
 
 @HiltAndroidTest
 @UninstallModules(AppModule::class)
@@ -31,9 +35,11 @@ class NoteScreenTest {
     @get:Rule(order = 1)
     val composeRule = createAndroidComposeRule<MainActivity>()
 
+    @Inject
+    lateinit var repository: NoteRepository
+
     @Before
     fun setUp(){
-
         hiltRule.inject()
     }
 
@@ -65,5 +71,20 @@ class NoteScreenTest {
         composeRule.onNodeWithText("Your note").assertIsDisplayed()
         composeRule.onNodeWithContentDescription("Add Note").performClick()
         composeRule.onNodeWithText("Enter title...").assertIsDisplayed()
+    }
+
+    @Test
+    fun deleteNote_isRemovedFromDatabase() = runBlocking {
+        val note = Note(title = "test", content = "content", timestamp = 1L, color = 1, id = 1)
+        repository.insertNote(note)
+
+        composeRule.onNodeWithText("test").assertIsDisplayed()
+
+        composeRule.onNodeWithContentDescription("Delete note test").performClick()
+
+        composeRule.onNodeWithText("test").assertDoesNotExist()
+
+        val dbNote = repository.getNoteById(1)
+        assert(dbNote == null)
     }
 }
