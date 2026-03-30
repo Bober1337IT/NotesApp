@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.bober.notesapp.core.util.TestTags
 import com.bober.notesapp.domain.util.NoteOrder
 import com.bober.notesapp.domain.util.OrderType
 
@@ -29,7 +31,8 @@ fun OrderSection(
                 selected = noteOrder is NoteOrder.Title,
                 onSelect = {
                     onOrderChange(NoteOrder.Title(noteOrder.orderType))
-                }
+                },
+                Modifier.testTag(TestTags.TITLE_RADIO_BUTTON)
             )
             Spacer(modifier = Modifier.width(8.dp))
             DefaultRadioButton(
