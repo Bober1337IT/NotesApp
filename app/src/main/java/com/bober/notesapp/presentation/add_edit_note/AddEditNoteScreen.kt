@@ -37,10 +37,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.bober.notesapp.core.util.TestTags
 import com.bober.notesapp.domain.model.Note
 import com.bober.notesapp.presentation.add_edit_note.components.TransparentHintTextField
 import kotlinx.coroutines.flow.collectLatest
@@ -165,7 +167,8 @@ fun AddEditNoteScreenContent(
                 onFocusChange = { onEvent(AddEditNoteEvent.ChangeTitleFocus(it)) },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
-                textStyle = MaterialTheme.typography.headlineMedium
+                textStyle = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.testTag(TestTags.TITLE_TEXT_FIELD)
             )
             Spacer(modifier = Modifier.height(16.dp))
             TransparentHintTextField(
@@ -175,7 +178,9 @@ fun AddEditNoteScreenContent(
                 onFocusChange = { onEvent(AddEditNoteEvent.ChangeContentFocus(it)) },
                 isHintVisible = contentState.isHintVisible,
                 textStyle = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .testTag(TestTags.CONTENT_TEXT_FIELD)
             )
         }
     }
