@@ -75,7 +75,7 @@ fun NoteScreenContent(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                navController.navigate(Screen.AddEditNoteScreen.route)
+                navController.navigate(Screen.AddEditNoteScreen())
             },
                 containerColor = MaterialTheme.colorScheme.primary
             ){
@@ -136,7 +136,11 @@ fun NoteScreenContent(
                             .fillMaxWidth()
                             .clickable {
                                 navController.navigate(
-                                    Screen.AddEditNoteScreen.route + "?noteId=${note.id}&noteColor=${note.color}"
+                                    navController.navigate(
+                                        Screen.AddEditNoteScreen(
+                                            noteId = note.id,
+                                            noteColor = note.color
+                                        ))
                                 )
                             },
                         onDeleteNote = {
