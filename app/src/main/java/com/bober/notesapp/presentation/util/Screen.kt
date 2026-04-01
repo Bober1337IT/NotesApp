@@ -1,6 +1,14 @@
 package com.bober.notesapp.presentation.util
 
-sealed class Screen(val route: String){
-    object NotesScreen: Screen("notes_screen")
-    object AddEditNoteScreen: Screen("add_edit_note_screen")
+import kotlinx.serialization.Serializable
+
+sealed class Screen {
+    @Serializable
+    object NotesScreen
+
+    @Serializable
+    data class AddEditNoteScreen(
+        val noteId: Int? = -1,
+        val noteColor: Int? = -1
+    )
 }
