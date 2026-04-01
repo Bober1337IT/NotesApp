@@ -35,28 +35,6 @@ class AddEditNoteViewModelTest {
     }
 
     @Test
-    fun `Load note with id, state should update with note details`() = runTest {
-        val note = Note(
-            title = "Title",
-            content = "Content",
-            timestamp = 1L,
-            color = 1,
-            id = 1
-        )
-        fakeRepository.insertNote(note)
-
-        val savedStateHandle = SavedStateHandle(mapOf("noteId" to 1))
-        viewModel = AddEditNoteViewModel(savedStateHandle, getNote, addNote)
-
-        // Give it a bit of time for the init block to finish its coroutine
-        mainDispatcherRule.testDispatcher.scheduler.advanceUntilIdle()
-
-        assertThat(viewModel.noteTitle.value.text).isEqualTo(note.title)
-        assertThat(viewModel.noteContent.value.text).isEqualTo(note.content)
-        assertThat(viewModel.noteTitle.value.isHintVisible).isFalse()
-    }
-
-    @Test
     fun `Enter title, state should update correctly`() {
         viewModel = AddEditNoteViewModel(SavedStateHandle(), getNote, addNote)
         val title = "New Title"

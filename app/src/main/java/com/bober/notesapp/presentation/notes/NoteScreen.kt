@@ -74,11 +74,12 @@ fun NoteScreenContent(
         containerColor = MaterialTheme.colorScheme.background,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(Screen.AddEditNoteScreen())
-            },
+            FloatingActionButton(
+                onClick = {
+                    navController.navigate(Screen.AddEditNoteScreen())
+                },
                 containerColor = MaterialTheme.colorScheme.primary
-            ){
+            ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Note")
             }
         }
@@ -113,7 +114,7 @@ fun NoteScreenContent(
                 visible = state.isOrderSectionVisible,
                 enter = fadeIn() + slideInVertically(),
                 exit = fadeOut() + slideOutVertically()
-                ) {
+            ) {
                 OrderSection(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -129,18 +130,17 @@ fun NoteScreenContent(
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(items = state.notes, key = { it.id!! }){note ->
+                items(items = state.notes, key = { it.id!! }) { note ->
                     NoteItem(
                         note = note,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
                                 navController.navigate(
-                                    navController.navigate(
-                                        Screen.AddEditNoteScreen(
-                                            noteId = note.id,
-                                            noteColor = note.color
-                                        ))
+                                    Screen.AddEditNoteScreen(
+                                        noteId = note.id,
+                                        noteColor = note.color
+                                    )
                                 )
                             },
                         onDeleteNote = {
@@ -188,7 +188,8 @@ fun NoteScreenPreview() {
                 title = "Preview Note 2",
                 content = "Content 2",
                 timestamp = 2L,
-                color = 0xFFE7ED9B.toInt())
+                color = 0xFFE7ED9B.toInt()
+            )
         ),
         isOrderSectionVisible = true
     )
